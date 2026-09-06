@@ -7,6 +7,7 @@
 class UberBlackFeature : public TripFeature
 {
 public:
+    UberBlackFeature(UberOperation *op);
     double getCost() override;
     std::string getDescription() override;
     OperationIterator *createIterator() override;

@@ -9,8 +9,10 @@ class ActiveTripIterator : public OperationIterator
 private:
     std::vector<UberOperation *> allNodes;
     int pos;
+    UberOperation *root;
 
 public:
+    ActiveTripIterator(UberOperation *root);
     void first() override;
     void next() override;
     bool isDone() override;

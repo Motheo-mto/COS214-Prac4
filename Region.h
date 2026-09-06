@@ -7,6 +7,8 @@
 
 class Region : public UberOperation
 {
+    friend class CompleteHierarchyIterator;
+
 private:
     std::list<UberOperation *> operations;
 

@@ -9,9 +9,11 @@ class TripState; // Forward declaration for State Pattern
 class Trip : public UberOperation
 {
 private:
+    friend class ActiveTripIterator;
     TripState *currentState;
 
 public:
+    Trip();
     double getCost() override;
     std::string getDescription() override;
     OperationIterator *createIterator() override;
