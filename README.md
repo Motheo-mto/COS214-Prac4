@@ -24,3 +24,4 @@
 	- **ConcreteIterator:** 
 		- `CompleteHierarchyIterator`: Visits every nested region and trip.
 		- `ActiveTripIterator`: Filters the traversal to only return `Trip` objects that are currently in the `InTransitState`.
+
