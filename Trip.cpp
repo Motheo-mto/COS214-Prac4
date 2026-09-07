@@ -1,10 +1,11 @@
 #include "Trip.h"
 #include "TripState.h"
 #include "ActiveTripIterator.h"
+#include "RequestedState.h"
 
 Trip::Trip()
 {
-    // currentState = new RequestedState(this);
+    currentState = new RequestedState();
 }
 
 double Trip::getCost()

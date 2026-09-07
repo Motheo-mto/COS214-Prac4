@@ -1,6 +1,11 @@
 #include "Region.h"
 #include "CompleteHierarchyIterator.h"
 
+double Region::setCost(double cost) {
+
+    (void)cost;
+}
+
 double Region::getCost()
 {
     double total = 0;
@@ -9,6 +14,12 @@ double Region::getCost()
         total += op->getCost();
     }
     return total;
+}
+
+std::string Region::setDescription(std::string desc) {
+
+    this->description = desc;
+    return this->description;
 }
 
 std::string Region::getDescription()

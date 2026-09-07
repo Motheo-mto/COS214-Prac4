@@ -10,10 +10,15 @@ class Region : public UberOperation
     friend class CompleteHierarchyIterator;
 
 private:
+    std::string name;
+    std::string description;
     std::list<UberOperation *> operations;
 
 public:
+    Region(const std::string &name);
+    double setCost(double cost) override;
     double getCost() override;
+    std::string setDescription(std::string desc);
     std::string getDescription() override;
     OperationIterator *createIterator() override;
     void add(UberOperation *a) override;
