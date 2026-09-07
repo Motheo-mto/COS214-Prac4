@@ -1,4 +1,5 @@
 #include "DriverAssignedState.h"
+#include "InTransitState.h"
 #include <iostream>
 
 void DriverAssignedState::assignDriver(std::string driver){
@@ -20,6 +21,11 @@ void DriverAssignedState::getDriver(){
 void DriverAssignedState::rideStatus(){
     std::cout << "Driver on their way, ride not started" << std::endl;
 
+}
+void DriverAssignedState::startRide(){
+    std::cout << driverName +" has arrived, starting uber ride..." << std::endl;
+    TripState* state = new InTransitState();
+    context->changeState(state);
 }
 
 void DriverAssignedState::cancelRide(){

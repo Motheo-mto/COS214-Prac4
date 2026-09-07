@@ -12,7 +12,7 @@ class DriverAssignedState: public TripState{
     void assignDriver(std::string driverName);
     void getDriver() override;
     void rideStatus() override;
-    // void startRide() override;
+    void startRide() ;
     // void endRide() override;
     void cancelRide() override;
 

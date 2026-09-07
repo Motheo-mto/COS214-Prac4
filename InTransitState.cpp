@@ -1,4 +1,5 @@
 #include "InTransitState.h"
+#include "CompletedState.h"
 #include <iostream>
 
 void InTransitState::getDriver(){
@@ -9,9 +10,11 @@ void InTransitState::getDriver(){
 //     std::cout<< "Ride in progress" << std::endl;
 // }
 
-// void InTransitState::endRide(){
-//     std::cout << "Ride still in progress" << std::endl;
-// }
+void InTransitState::endRide(){
+    std::cout << "You have arrived at your destination, ride complete!" << std::endl;
+    TripState* state = new CompletedState();
+    context->changeState(state);
+}
 
 void InTransitState::rideStatus(){
     std::cout<< "Ride in progress" << std::endl;

@@ -10,7 +10,7 @@ class InTransitState: public TripState{
     void getDriver() override;
     void rideStatus() override;
     // void startRide() override;
-    // void endRide() override;
+    void endRide();
     void cancelRide() override;
 };
 #endif

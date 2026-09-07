@@ -1,8 +1,11 @@
 #include "RequestedState.h"
+#include "DriverAssignedState.h"
 #include <iostream>
 
 void RequestedState::getDriver(){
-   std::cout << "Still searching for driver" << std::endl;
+   std::cout << "Driver found!" << std::endl;
+   TripState* state = new DriverAssignedState();
+   context->changeState(state);
 }
 
 // void RequestedState::startRide(){
