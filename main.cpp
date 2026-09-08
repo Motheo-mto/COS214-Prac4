@@ -56,10 +56,20 @@ int main()
     Brooklyn->add(PSudud);
     Hatfield->add(Tshego);
 
+    std::cout<<std::endl;
+    std::cout<<"----- Add/Remove Trip object to another Trip object -----"<<std::endl;
+    std::cout<<std::endl;
+
     Tshego->add(Motheo);
     Tshego->remove(Motheo);
+    std::cout<<std::endl;
+    // -------------------------------------------------------------
 
     // CompleteHierarchyIterator Traversal
+
+    std::cout<< "----- Complete Hierarchy Iterator Traversal -----" <<std::endl;
+    std::cout<<std::endl;
+
     OperationIterator *allIt = Gauteng->createIterator();
     for (allIt->first(); !allIt->isDone(); allIt->next())
     {
@@ -71,14 +81,28 @@ int main()
     }
     delete allIt;
 
+    std::cout<<std::endl;
+    // -------------------------------------------------------------
+
     Trip *tripTshego = dynamic_cast<Trip *>(Tshego);
     Trip *tripSudud = dynamic_cast<Trip *>(Sudud);
     Trip *tripMotheo = dynamic_cast<Trip *>(Motheo);
+
+    // -------------------------------------------------------------
+
+    std::cout<<"----- Motheo Ride Status -----"<<std::endl;
+    std::cout<<std::endl;
 
     tripMotheo->rideStatus();
     tripMotheo->startRide();
     tripMotheo->endRide();
     tripMotheo->assignDriver("Alice");
+
+    std::cout<<std::endl;
+    // -------------------------------------------------------------
+
+    std::cout<<"----- Dummy Trip Testing -----"<<std::endl;
+    std::cout<<std::endl;
 
     Trip *dummyTrip = new Trip();
     RequestedState *rs = new RequestedState();
@@ -88,21 +112,32 @@ int main()
     rs->getDriver();
     delete rs;
 
+    std::cout<<std::endl;
+
+    std::cout<<"----- Motheo Testing -----"<<std::endl;
+    std::cout<<std::endl;
+
+
     tripMotheo->changeState(new DriverAssignedState());
     tripMotheo->assignDriver("Alice");
     tripMotheo->rideStatus();
     tripMotheo->endRide();
-
+    std::cout<<"--------"<<std::endl;
     DriverAssignedState *das = new DriverAssignedState();
     das->assignDriver("AliceTest");
     das->getDriver();
     delete das;
-
+    std::cout<<"--------"<<std::endl;
     tripMotheo->startRide();
 
     tripMotheo->rideStatus();
     tripMotheo->assignDriver("Bob");
     tripMotheo->startRide();
+
+    std::cout<<std::endl;
+
+    std::cout<<"----- Active Trip Iterator Traversal -----"<<std::endl;
+    std::cout<<std::endl;
 
     // ActiveTripIterator traversal
     ActiveTripIterator activeTripIt(Gauteng);
@@ -120,12 +155,19 @@ int main()
     its->getDriver();
     delete its;
 
-    tripMotheo->endRide();
+    std::cout<<std::endl;
+    std::cout<<"----- Motheo Completed Ride Testing -----"<<std::endl;
+    std::cout<<std::endl;
 
+    tripMotheo->endRide();
     tripMotheo->rideStatus();
     tripMotheo->assignDriver("Charlie");
     tripMotheo->startRide();
     tripMotheo->endRide();
+    std::cout<<std::endl;
+
+    std::cout<<"----- Ride cancelling testing -----"<<std::endl;
+    std::cout<<std::endl;
 
     CompletedState *cs_cancel = new CompletedState();
     cs_cancel->cancelRide();
@@ -147,13 +189,103 @@ int main()
     its_cancel->cancelRide();
     delete its_cancel;
 
+    std::cout<<std::endl;
+    std::cout<<"----- Active Iterator, with no active trips -----"<<std::endl;
+    std::cout<<std::endl;
+
     ActiveTripIterator nullIt(nullptr);
     nullIt.first();
     nullIt.next();
 
+    std::cout<<std::endl;
+    std::cout<<"----- Setting up more trips -----"<<std::endl;
+    std::cout<<std::endl;
+
+    UberOperation *Belle = new Trip();
+    UberOperation *Finn = new Trip();
+    UberOperation *David = new Trip();
+
+    Belle->setCost(100.0);
+    Finn->setCost(160.0);
+    David->setCost(290.0);
+
+    Brooklyn->add(Belle);
+    UP_Campus->add(Finn);
+    Johannesburg->add(David);
+
+    Trip *tBelle = dynamic_cast<Trip *>(Belle);
+    Trip *tFinn = dynamic_cast<Trip *>(Finn);
+    Trip *tDavid = dynamic_cast<Trip *>(David);
+
+    tBelle->changeState(new DriverAssignedState());
+    tFinn->changeState(new DriverAssignedState());
+    tDavid->changeState(new DriverAssignedState());
+
+    DriverAssignedState *das1 = new DriverAssignedState();
+    DriverAssignedState *das2 = new DriverAssignedState();
+    DriverAssignedState *das3 = new DriverAssignedState();
+
+    tBelle->assignDriver("Bella");
+    tFinn->assignDriver("Ferran");
+    tDavid->assignDriver("Lucy");
+
+    tBelle->startRide();
+    tFinn->startRide();
+    tDavid->startRide();
+
+    std::cout<<std::endl;
+    std::cout<<"----- Iterators with 3 active rides -------------------------------------------------"<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<"---Hierarchy"<<std::endl;
+    std::cout<<std::endl;
+
+    OperationIterator *HIt = Gauteng->createIterator();
+    for (HIt->first(); !HIt->isDone(); HIt->next())
+    {
+        UberOperation *op = HIt->currentItem();
+        if (op)
+        {
+            std::cout << op->getDescription() << " | Cost: " << op->getCost() << std::endl;
+        }
+    }
+    delete HIt;
+
+    std::cout<<std::endl;
+    std::cout<<"---Active Trips"<<std::endl;
+    std::cout<<std::endl;
+    ActiveTripIterator ATI(Gauteng);
+    for (ATI.first(); !ATI.isDone(); ATI.next())
+    {
+        UberOperation *op = ATI.currentItem();
+        if (op)
+        {
+            std::cout << op->getDescription() << " | Cost: " << op->getCost() << std::endl;
+        }
+    }
+    ATI.currentItem();
+
+    std::cout<<std::endl;
+    std::cout<<"----- Iterators End -------------------------------------------------"<<std::endl;
+    std::cout<<std::endl;
+
+    std::cout<<"----- Ride Status and Ending active trips -----"<<std::endl;
+    std::cout<<std::endl;
+
+    tBelle->rideStatus();
+    tFinn->rideStatus();
+    tDavid->rideStatus();
+
+    tBelle->endRide();
+    tFinn->endRide();
+    tDavid->endRide();
+
+    //=========================================
+
+    delete das1;
+    delete das2;
+    delete das3;
     Gauteng->remove(Pretoria);
     delete Pretoria;
-
     delete dummyTrip;
     delete Gauteng;
 
