@@ -8,8 +8,10 @@ using namespace std;
 
 class UberOperation
 {
+    double cost;
 public:
     virtual double getCost() = 0;
+    virtual void setCost(double) = 0;
     virtual string getDescription() = 0;
     virtual OperationIterator *createIterator() = 0;
     virtual void add(UberOperation *a);

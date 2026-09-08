@@ -3,8 +3,9 @@
 #include "TripFeature.h"
 #include "TripState.h"
 #include "CompleteHierarchyIterator.h"
+#include "InTransitState.h"
 
-ActiveTripIterator::ActiveTripIterator(UberOperation *root) : root(root), pos(0)
+ActiveTripIterator::ActiveTripIterator(UberOperation *root) : pos(0), root(root)
 {
 }
 
@@ -48,7 +49,7 @@ void ActiveTripIterator::next()
 
 bool ActiveTripIterator::isDone()
 {
-    return pos >= allNodes.size();
+    return (size_t)pos >= allNodes.size();
 }
 
 UberOperation *ActiveTripIterator::currentItem()

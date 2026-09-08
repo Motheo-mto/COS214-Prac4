@@ -1,15 +1,23 @@
 #include "Trip.h"
 #include "TripState.h"
 #include "ActiveTripIterator.h"
+#include "RequestedState.h"
 
 Trip::Trip()
 {
-    // currentState = new RequestedState(this);
+    currentState = new RequestedState();
+    currentState->setContext(this);
+    driverName = "";
 }
 
 double Trip::getCost()
 {
-    return 50.0; // Base cost
+    return cost; // Base cost
+}
+
+void Trip::setCost(double cost)
+{
+    this->cost = cost;
 }
 
 std::string Trip::getDescription()
@@ -29,21 +37,30 @@ void Trip::changeState(TripState *s)
         delete currentState;
     }
     currentState = s;
+    if (currentState)
+    {
+        currentState->setContext(this);
+    }
 }
 
-void Trip::assignDriver()
+void Trip::assignDriver(std::string driverName)
 {
-    // currentState->assignDriver();
+    currentState->assignDriver(driverName);
 }
 
 void Trip::startRide()
 {
-    // currentState->startRide();
+    currentState->startRide();
 }
 
 void Trip::endRide()
 {
-    // currentState->endRide();
+    currentState->endRide();
+}
+
+void Trip::rideStatus()
+{
+    currentState->rideStatus();
 }
 
 Trip::~Trip()

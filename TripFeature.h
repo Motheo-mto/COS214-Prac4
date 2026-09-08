@@ -15,6 +15,7 @@ protected:
 public:
     TripFeature(UberOperation *op);
     double getCost() override;
+    void setCost(double cost) override;
     std::string getDescription() override;
     OperationIterator *createIterator() override = 0;
     ~TripFeature() override;

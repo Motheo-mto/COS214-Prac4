@@ -7,6 +7,11 @@ double TripFeature::getCost()
     return operation->getCost();
 }
 
+void TripFeature::setCost(double cost)
+{
+    operation->setCost(cost);
+}
+
 std::string TripFeature::getDescription()
 {
     return operation->getDescription();
